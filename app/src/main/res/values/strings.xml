@@ -3,4 +3,6 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_first_activity_scanner">First Activity Scanner</string>
+    <string name="title_activity_second_activity_scanner">Second Activity Scanner</string>
 </resources>

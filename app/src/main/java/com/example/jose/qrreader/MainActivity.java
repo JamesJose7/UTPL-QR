@@ -51,7 +51,20 @@ public class MainActivity extends Activity {
 
             String result = intent.getStringExtra("SCAN_RESULT");
             String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
-            Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+
+            startNewActivity(Integer.parseInt(result));
+
+
         }
+    }
+
+    public void startNewActivity(int newActivityID) {
+
+        Class[] classes = {FirstActivityScanner.class, SecondActivityScanner.class};
+
+        Intent intent = new Intent(this, classes[newActivityID]);
+        startActivity(intent);
+
     }
 }
