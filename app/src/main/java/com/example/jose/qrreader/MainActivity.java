@@ -20,6 +20,8 @@ import com.google.zxing.integration.android.IntentResult;
 
 public class MainActivity extends Activity {
 
+    IntentIntegrator integrator = new IntentIntegrator(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +29,6 @@ public class MainActivity extends Activity {
 
         Button buttonStartScan = (Button) findViewById(R.id.buttonStartScan);
 
-        final IntentIntegrator integrator = new IntentIntegrator(this);
 
         buttonStartScan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +46,10 @@ public class MainActivity extends Activity {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+
+        /**Does Not Work**/
+
+        /*IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
 
         if (scanResult != null) {
 
@@ -54,8 +58,25 @@ public class MainActivity extends Activity {
             //Toast.makeText(this, result, Toast.LENGTH_LONG).show();
 
             startNewActivity(Integer.parseInt(result));
+        }
 
 
+         if (requestCode == 0) {
+            String contents = intent.getStringExtra("SCAN_RESULT");
+            String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
+
+            //startNewActivity(Integer.parseInt(contents));
+        } */
+
+        /****/
+
+        if (resultCode == RESULT_CANCELED) {
+            //Handle cancel
+        } else {
+            String contents = intent.getStringExtra("SCAN_RESULT");
+            String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
+
+            startNewActivity(Integer.parseInt(contents));
         }
     }
 
