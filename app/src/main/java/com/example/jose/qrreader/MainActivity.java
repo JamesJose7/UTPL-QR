@@ -22,6 +22,8 @@ public class MainActivity extends Activity {
 
     IntentIntegrator integrator = new IntentIntegrator(this);
 
+    public static final String INDIVIDUAL_NUMBER = "INDIVIDUAL_NUMBER";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,15 +78,14 @@ public class MainActivity extends Activity {
             String contents = intent.getStringExtra("SCAN_RESULT");
             String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
 
-            startNewActivity(Integer.parseInt(contents));
+            startNewActivity(contents);
         }
     }
 
-    public void startNewActivity(int newActivityID) {
+    public void startNewActivity(String contents) {
 
-        Class[] classes = {FirstActivityScanner.class, SecondActivityScanner.class};
-
-        Intent intent = new Intent(this, classes[newActivityID]);
+        Intent intent = new Intent(this, FirstActivityScanner.class);
+        intent.putExtra(INDIVIDUAL_NUMBER, contents);
         startActivity(intent);
 
     }

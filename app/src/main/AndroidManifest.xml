@@ -20,7 +20,6 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <android:uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
 
@@ -54,14 +53,6 @@
         <activity
             android:name=".FirstActivityScanner"
             android:label="@string/title_activity_first_activity_scanner"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.jose.qrreader.MainActivity" />
-        </activity>
-        <activity
-            android:name=".SecondActivityScanner"
-            android:label="@string/title_activity_second_activity_scanner"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

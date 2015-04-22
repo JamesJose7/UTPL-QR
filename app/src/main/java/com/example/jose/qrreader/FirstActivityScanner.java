@@ -1,17 +1,43 @@
 package com.example.jose.qrreader;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import SampleDataBase.Individual;
+import SampleDataBase.IndividualCreator;
 
 
 public class FirstActivityScanner extends ActionBarActivity {
+
+    public IndividualCreator creator = new IndividualCreator();
+
+    private TextView nameTextView;
+    private TextView backgroundTextview;
+    private TextView idTextView;
+    private TextView plateTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_activity_scanner);
+
+        Individual[] individuals = creator.getIndividuals();
+
+        nameTextView = (TextView) findViewById(R.id.nameTextView);
+        backgroundTextview = (TextView) findViewById(R.id.backgroundTextView);
+        idTextView = (TextView) findViewById(R.id.idTextView);
+        plateTextView = (TextView) findViewById(R.id.plateTextView);
+
+
+        Intent intent = getIntent();
+        String contents = intent.getStringExtra(MainActivity.INDIVIDUAL_NUMBER);
+        int individualNumber = Integer.parseInt(contents);
+        setData(individuals[individualNumber]);
+
     }
 
 
@@ -35,5 +61,14 @@ public class FirstActivityScanner extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void setData(Individual individual) {
+
+        nameTextView.setText(individual.getName());
+        backgroundTextview.setText(individual.getBackground());
+        idTextView.setText(individual.getID() + "");
+        plateTextView.setText(individual.getPlate());
+
     }
 }
