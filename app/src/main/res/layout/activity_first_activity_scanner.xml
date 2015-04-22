@@ -6,11 +6,64 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.jose.qrreader.FirstActivityScanner">
 
-    <TextView android:text="@string/hello_world"
+    <TextView android:text="Name:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="40sp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:textSize="12sp"
+        android:id="@+id/nameHeader"
+        android:layout_marginTop="60dp"/>
+
+    <TextView android:text="Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:id="@+id/nameTextView"
+        android:layout_below="@id/nameHeader"
+        android:layout_alignParentLeft="true"/>
+
+    <TextView android:text="Background:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:id="@+id/backgroundHeader"
+        android:layout_marginTop="180dp"/>
+
+    <TextView android:text="Background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:id="@+id/backgroundTextView"
+        android:layout_below="@id/backgroundHeader"
+        android:layout_alignParentLeft="true"/>
+
+    <TextView android:text="ID:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:id="@+id/idHeader"
+        android:layout_marginTop="300dp"/>
+
+    <TextView android:text="ID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:id="@+id/idTextView"
+        android:layout_below="@id/idHeader"
+        android:layout_alignParentLeft="true"/>
+
+    <TextView android:text="Plate:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:id="@+id/plateHeader"
+        android:layout_marginTop="420dp"/>
+
+    <TextView android:text="Plate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:id="@+id/plateTextView"
+        android:layout_below="@id/plateHeader"
+        android:layout_alignParentLeft="true"/>
 
 </RelativeLayout>
