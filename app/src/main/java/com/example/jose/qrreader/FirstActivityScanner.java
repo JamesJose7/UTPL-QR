@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import SampleDataBase.Individual;
 import SampleDataBase.IndividualCreator;
 
@@ -19,11 +22,12 @@ public class FirstActivityScanner extends ActionBarActivity {
     public IndividualCreator mCreator = MainActivity.mCreator;
 
     Individual[] mIndividuals;
+    Individual mCurrentIndividual;
 
     private TextView nameTextView;
     private TextView infraccionesTextView;
+    private TextView registerDates;
     private TextView plateTextView;
-    private Button agregarInfracciones;
     private LinearLayout infraccionesLayout;
 
     private int individualNumber;
@@ -33,16 +37,24 @@ public class FirstActivityScanner extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_activity_scanner);
 
+        Intent intent = getIntent();
+        String contents = intent.getStringExtra(MainActivity.INDIVIDUAL_NUMBER);
+        individualNumber = Integer.parseInt(contents);
+
         mIndividuals = mCreator.getIndividuals();
+        mCurrentIndividual = mIndividuals[individualNumber];
+
+
+        //Views assignment
 
         infraccionesLayout = (LinearLayout) findViewById(R.id.infraccionesLayout);
-
         nameTextView = (TextView) findViewById(R.id.nameTextView);
         infraccionesTextView = (TextView) findViewById(R.id.infraccionesTextView);
+        registerDates = (TextView) findViewById(R.id.fechaRegistro);
         plateTextView = (TextView) findViewById(R.id.plateTextView);
-        agregarInfracciones = (Button) findViewById(R.id.agregarInfracciones);
+        Button agregarInfracciones = (Button) findViewById(R.id.agregarInfracciones);
 
-
+        //Add infractions button
         agregarInfracciones.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,10 +64,8 @@ public class FirstActivityScanner extends ActionBarActivity {
 
         infraccionesLayout.setVisibility(View.INVISIBLE);
 
-        Intent intent = getIntent();
-        String contents = intent.getStringExtra(MainActivity.INDIVIDUAL_NUMBER);
-        individualNumber = Integer.parseInt(contents);
-        setData(mIndividuals[individualNumber]);
+
+        setData(mCurrentIndividual);
 
     }
 
@@ -93,25 +103,35 @@ public class FirstActivityScanner extends ActionBarActivity {
                                         individual.getBackground());
         } else {
             infraccionesTextView.setText(individual.getNuevosAntecedentes());
+            registerDates.setText(individual.getDates());
+
         }
 
     }
 
     public void onClick(View view) {
 
-        String nuevosAntecedentes = mIndividuals[individualNumber].getNuevosAntecedentes();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM | hh:mm a");
+        Date date = new Date();
+
+        String nuevosAntecedentes = mCurrentIndividual.getNuevosAntecedentes();
+        String dates = mCurrentIndividual.getDates();
+
+        //Set Dates
+        dates += formatter.format(date) + "\n";
+        mCurrentIndividual.setDates(dates);
 
         switch (view.getId()) {
             case R.id.semaforoEnRojo:
                 nuevosAntecedentes += "Semaforo en rojo\n";
-                mIndividuals[individualNumber].setNuevosAntecedentes(nuevosAntecedentes);
-                mIndividuals[individualNumber].setBackground("Antecedentes");
+                mCurrentIndividual.setNuevosAntecedentes(nuevosAntecedentes);
+                mCurrentIndividual.setBackground("Antecedentes");
                 break;
 
             case R.id.noEstacionar:
                 nuevosAntecedentes += "No estacionar\n";
-                mIndividuals[individualNumber].setNuevosAntecedentes(nuevosAntecedentes);
-                mIndividuals[individualNumber].setBackground("Antecedentes");
+                mCurrentIndividual.setNuevosAntecedentes(nuevosAntecedentes);
+                mCurrentIndividual.setBackground("Antecedentes");
                 break;
             default:
                 break;
@@ -120,6 +140,6 @@ public class FirstActivityScanner extends ActionBarActivity {
 
         infraccionesLayout.setVisibility(View.INVISIBLE);
 
-        setData(mIndividuals[individualNumber]);
+        setData(mCurrentIndividual);
     }
 }

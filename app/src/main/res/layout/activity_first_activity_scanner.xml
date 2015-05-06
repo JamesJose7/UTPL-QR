@@ -1,9 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#fff"
     tools:context="com.example.jose.qrreader.FirstActivityScanner">
 
 
@@ -68,15 +67,33 @@
             android:layout_below="@+id/relativeLayout"
             android:layout_centerHorizontal="true"/>
 
-        <TextView
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
+            android:layout_below="@id/agregarInfracciones"
             android:layout_marginTop="20dp"
-            android:gravity="center_horizontal"
-            android:text="...."
-            android:id="@+id/infraccionesTextView"
-            android:layout_below="@+id/agregarInfracciones"
-            android:layout_centerHorizontal="true"/>
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="New Text"
+                android:id="@+id/fechaRegistro"
+                android:layout_weight="60"
+                android:paddingLeft="15dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center_horizontal"
+                android:text="...."
+                android:id="@+id/infraccionesTextView"
+                android:layout_weight="40"/>
+
+
+        </LinearLayout>
+
     </RelativeLayout>
 
     <LinearLayout

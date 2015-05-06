@@ -13,6 +13,7 @@ public class Individual {
     private int mID;
     private String mPlate;
     private String mNuevosAntecedentes = "";
+    private String mDates = "";
 
     public Individual(String name, String background, int id, String plate) {
         mName = name;
@@ -49,5 +50,11 @@ public class Individual {
         return mNuevosAntecedentes;
     }
 
+    public void setDates(String dates) {
+        mDates = dates;
+    }
 
+    public String getDates() {
+        return mDates;
+    }
 }
