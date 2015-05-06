@@ -17,10 +17,14 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import SampleDataBase.IndividualCreator;
+
 
 public class MainActivity extends Activity {
 
     IntentIntegrator integrator = new IntentIntegrator(this);
+
+    public static final IndividualCreator mCreator = new IndividualCreator();
 
     public static final String INDIVIDUAL_NUMBER = "INDIVIDUAL_NUMBER";
 

@@ -1,5 +1,8 @@
 package SampleDataBase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by agua on 21/04/15.
  */
@@ -9,6 +12,7 @@ public class Individual {
     private String mBackground;
     private int mID;
     private String mPlate;
+    private String mNuevosAntecedentes = "";
 
     public Individual(String name, String background, int id, String plate) {
         mName = name;
@@ -25,6 +29,10 @@ public class Individual {
         return mPlate;
     }
 
+    public void setBackground(String background) {
+        mBackground = background;
+    }
+
     public String getBackground() {
         return mBackground;
     }
@@ -32,4 +40,14 @@ public class Individual {
     public String getName() {
         return mName;
     }
+
+    public void setNuevosAntecedentes(String nuevosAntecedentes) {
+        mNuevosAntecedentes = nuevosAntecedentes;
+    }
+
+    public String getNuevosAntecedentes() {
+        return mNuevosAntecedentes;
+    }
+
+
 }

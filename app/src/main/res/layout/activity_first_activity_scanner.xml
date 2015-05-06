@@ -6,64 +6,138 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.jose.qrreader.FirstActivityScanner">
 
-    <TextView android:text="Name:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:id="@+id/nameHeader"
-        android:layout_marginTop="60dp"/>
 
-    <TextView android:text="Name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:id="@+id/nameTextView"
-        android:layout_below="@id/nameHeader"
-        android:layout_alignParentLeft="true"/>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-    <TextView android:text="Background:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:id="@+id/backgroundHeader"
-        android:layout_marginTop="180dp"/>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeLayout"
+            android:orientation="horizontal"
+            android:weightSum="100">
 
-    <TextView android:text="Background"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:id="@+id/backgroundTextView"
-        android:layout_below="@id/backgroundHeader"
-        android:layout_alignParentLeft="true"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="35">
 
-    <TextView android:text="ID:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:id="@+id/idHeader"
-        android:layout_marginTop="300dp"/>
+                <TextView android:text="Nombre:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:id="@+id/nameHeader"/>
 
-    <TextView android:text="ID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:id="@+id/idTextView"
-        android:layout_below="@id/idHeader"
-        android:layout_alignParentLeft="true"/>
+                <TextView android:text="Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:id="@+id/nameTextView"/>
+            </LinearLayout>
 
-    <TextView android:text="Plate:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:id="@+id/plateHeader"
-        android:layout_marginTop="420dp"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="65">
 
-    <TextView android:text="Plate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:id="@+id/plateTextView"
-        android:layout_below="@id/plateHeader"
-        android:layout_alignParentLeft="true"/>
+                <TextView android:text="Placa:"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textSize="12sp"
+                          android:id="@+id/plateHeader"/>
+
+                <TextView android:text="Placa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:id="@+id/plateTextView"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Agregar infraccion"
+            android:id="@+id/agregarInfracciones"
+            android:layout_below="@+id/relativeLayout"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:text="...."
+            android:id="@+id/infraccionesTextView"
+            android:layout_below="@+id/agregarInfracciones"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#fff"
+        android:id="@+id/infraccionesLayout">
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Semaforo en rojo"
+            android:id="@+id/semaforoEnRojo"
+            android:onClick="onClick"/>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="No estacionar"
+            android:id="@+id/noEstacionar"
+            android:onClick="onClick"/>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
 </RelativeLayout>

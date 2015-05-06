@@ -5,6 +5,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import SampleDataBase.Individual;
@@ -13,30 +16,46 @@ import SampleDataBase.IndividualCreator;
 
 public class FirstActivityScanner extends ActionBarActivity {
 
-    public IndividualCreator creator = new IndividualCreator();
+    public IndividualCreator mCreator = MainActivity.mCreator;
+
+    Individual[] mIndividuals;
 
     private TextView nameTextView;
-    private TextView backgroundTextview;
-    private TextView idTextView;
+    private TextView infraccionesTextView;
     private TextView plateTextView;
+    private Button agregarInfracciones;
+    private LinearLayout infraccionesLayout;
+
+    private int individualNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_activity_scanner);
 
-        Individual[] individuals = creator.getIndividuals();
+        mIndividuals = mCreator.getIndividuals();
+
+        infraccionesLayout = (LinearLayout) findViewById(R.id.infraccionesLayout);
 
         nameTextView = (TextView) findViewById(R.id.nameTextView);
-        backgroundTextview = (TextView) findViewById(R.id.backgroundTextView);
-        idTextView = (TextView) findViewById(R.id.idTextView);
+        infraccionesTextView = (TextView) findViewById(R.id.infraccionesTextView);
         plateTextView = (TextView) findViewById(R.id.plateTextView);
+        agregarInfracciones = (Button) findViewById(R.id.agregarInfracciones);
 
+
+        agregarInfracciones.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                infraccionesLayout.setVisibility(View.VISIBLE);
+            }
+        });
+
+        infraccionesLayout.setVisibility(View.INVISIBLE);
 
         Intent intent = getIntent();
         String contents = intent.getStringExtra(MainActivity.INDIVIDUAL_NUMBER);
-        int individualNumber = Integer.parseInt(contents);
-        setData(individuals[individualNumber]);
+        individualNumber = Integer.parseInt(contents);
+        setData(mIndividuals[individualNumber]);
 
     }
 
@@ -65,10 +84,42 @@ public class FirstActivityScanner extends ActionBarActivity {
 
     public void setData(Individual individual) {
 
+
         nameTextView.setText(individual.getName());
-        backgroundTextview.setText(individual.getBackground());
-        idTextView.setText(individual.getID() + "");
         plateTextView.setText(individual.getPlate());
 
+        if(individual.getBackground().equals(IndividualCreator.NO_ANTECEDENTES)) {
+            infraccionesTextView.setText("Antecedentes\n" +
+                                        individual.getBackground());
+        } else {
+            infraccionesTextView.setText(individual.getNuevosAntecedentes());
+        }
+
+    }
+
+    public void onClick(View view) {
+
+        String nuevosAntecedentes = mIndividuals[individualNumber].getNuevosAntecedentes();
+
+        switch (view.getId()) {
+            case R.id.semaforoEnRojo:
+                nuevosAntecedentes += "Semaforo en rojo\n";
+                mIndividuals[individualNumber].setNuevosAntecedentes(nuevosAntecedentes);
+                mIndividuals[individualNumber].setBackground("Antecedentes");
+                break;
+
+            case R.id.noEstacionar:
+                nuevosAntecedentes += "No estacionar\n";
+                mIndividuals[individualNumber].setNuevosAntecedentes(nuevosAntecedentes);
+                mIndividuals[individualNumber].setBackground("Antecedentes");
+                break;
+            default:
+                break;
+
+        }
+
+        infraccionesLayout.setVisibility(View.INVISIBLE);
+
+        setData(mIndividuals[individualNumber]);
     }
 }
