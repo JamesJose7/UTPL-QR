@@ -1,9 +1,7 @@
 package com.example.jose.utplqr;
 
 import android.app.Activity;
-import android.app.Notification;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,22 +13,9 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import SampleDataBase.Individual;
-import SampleDataBase.IndividualCreator;
-
 
 public class FirstActivityScanner extends Activity {
 
-    public IndividualCreator mCreator = MainActivity.mCreator;
-
-    Individual[] mIndividuals;
-    Individual mCurrentIndividual;
-
-    private TextView nameTextView;
-    private TextView infraccionesTextView;
-    private TextView registerDates;
-    private TextView plateTextView;
-    private LinearLayout infraccionesLayout;
 
     private int individualNumber;
 
@@ -43,31 +28,9 @@ public class FirstActivityScanner extends Activity {
         String contents = intent.getStringExtra(MainActivity.INDIVIDUAL_NUMBER);
         individualNumber = Integer.parseInt(contents);
 
-        mIndividuals = mCreator.getIndividuals();
-        mCurrentIndividual = mIndividuals[individualNumber];
+        setTitle("Test");
 
 
-        //Views assignment
-
-        infraccionesLayout = (LinearLayout) findViewById(R.id.infraccionesLayout);
-        nameTextView = (TextView) findViewById(R.id.nameTextView);
-        infraccionesTextView = (TextView) findViewById(R.id.infraccionesTextView);
-        registerDates = (TextView) findViewById(R.id.fechaRegistro);
-        plateTextView = (TextView) findViewById(R.id.plateTextView);
-        Button agregarInfracciones = (Button) findViewById(R.id.agregarInfracciones);
-
-        //Add infractions button
-        agregarInfracciones.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                infraccionesLayout.setVisibility(View.VISIBLE);
-            }
-        });
-
-        infraccionesLayout.setVisibility(View.INVISIBLE);
-
-
-        setData(mCurrentIndividual);
 
     }
 
@@ -94,54 +57,5 @@ public class FirstActivityScanner extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setData(Individual individual) {
 
-
-        nameTextView.setText(individual.getName());
-        plateTextView.setText(individual.getPlate());
-
-        if(individual.getBackground().equals(IndividualCreator.NO_ANTECEDENTES)) {
-            infraccionesTextView.setText("Antecedentes\n" +
-                                        individual.getBackground());
-        } else {
-            infraccionesTextView.setText(individual.getNuevosAntecedentes());
-            registerDates.setText(individual.getDates());
-
-        }
-
-    }
-
-    public void onClick(View view) {
-
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM | hh:mm a");
-        Date date = new Date();
-
-        String nuevosAntecedentes = mCurrentIndividual.getNuevosAntecedentes();
-        String dates = mCurrentIndividual.getDates();
-
-        //Set Dates
-        dates += formatter.format(date) + "\n";
-        mCurrentIndividual.setDates(dates);
-
-        switch (view.getId()) {
-            case R.id.semaforoEnRojo:
-                nuevosAntecedentes += "Semaforo en rojo\n";
-                mCurrentIndividual.setNuevosAntecedentes(nuevosAntecedentes);
-                mCurrentIndividual.setBackground("Antecedentes");
-                break;
-
-            case R.id.noEstacionar:
-                nuevosAntecedentes += "No estacionar\n";
-                mCurrentIndividual.setNuevosAntecedentes(nuevosAntecedentes);
-                mCurrentIndividual.setBackground("Antecedentes");
-                break;
-            default:
-                break;
-
-        }
-
-        infraccionesLayout.setVisibility(View.INVISIBLE);
-
-        setData(mCurrentIndividual);
-    }
 }
