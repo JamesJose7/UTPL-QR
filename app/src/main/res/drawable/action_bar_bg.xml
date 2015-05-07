@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/ab_bg_border" />
+    <item android:drawable="@drawable/ab_bg_inner"
+          android:bottom="5dp"
+
+        />
+
+
+</layer-list>

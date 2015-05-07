@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:background="#fff"
-    tools:context="com.example.jose.qrreader.FirstActivityScanner">
+    tools:context="com.example.jose.utplqr.FirstActivityScanner">
 
 
     <RelativeLayout
