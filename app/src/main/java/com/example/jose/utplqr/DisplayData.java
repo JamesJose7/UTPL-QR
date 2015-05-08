@@ -26,9 +26,8 @@ public class DisplayData extends Activity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
 
-    private int individualNumber;
-
     private ProgressBar mProgressBar;
+    private String mQRContents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +38,9 @@ public class DisplayData extends Activity {
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mProgressBar.setVisibility(View.INVISIBLE);
 
+        //Get QR contents from previous activity
         Intent intent = getIntent();
-        String contents = intent.getStringExtra(MainActivity.INDIVIDUAL_NUMBER);
-        individualNumber = Integer.parseInt(contents);
+        mQRContents = intent.getStringExtra(MainActivity.INDIVIDUAL_NUMBER);
 
         setTitle("Test");
 
