@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+=======
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:paddingTop="15dp"
+              android:paddingBottom="15dp"
+              android:id="@+id/custom_action_bar"
+    android:background="@drawable/action_bar_bg">
+
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="Action"/>
+>>>>>>> ef54e9c846576c4c78a3853fce36ea86e1629fce
 
 </LinearLayout>

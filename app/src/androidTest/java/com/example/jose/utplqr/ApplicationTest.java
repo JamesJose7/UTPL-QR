@@ -1,4 +1,4 @@
-package com.example.jose.qrreader;
+package com.example.jose.utplqr;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

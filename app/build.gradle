@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 21
+    compileSdkVersion 22
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.example.jose.qrreader"
-        minSdkVersion 15
-        targetSdkVersion 21
+        applicationId "com.example.jose.utplqr"
+        minSdkVersion 16
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
@@ -34,6 +34,8 @@ repositories {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.0.0'
+    compile 'com.android.support:cardview-v7:21.0.+'
+    compile 'com.squareup.okhttp:okhttp:2.3.0'
     /*compile 'com.google.zxing:core:3.2.0'
 
     compile 'com.journeyapps:zxing-android-embedded:2.3.0@aar'
