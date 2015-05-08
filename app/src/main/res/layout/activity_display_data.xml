@@ -3,13 +3,20 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:background="#fff"
-    tools:context="com.example.jose.utplqr.FirstActivityScanner">
+    tools:context="com.example.jose.utplqr.DisplayData">
 
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 
 </RelativeLayout>
