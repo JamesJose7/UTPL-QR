@@ -1,10 +1,204 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="#fff"
-    tools:context="com.example.jose.utplqr.DisplayData">
+                xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp"
+                android:background="#fff"
+                tools:context="com.example.jose.utplqr.DisplayData">
 
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/titulo"
+        android:text="Titulo"
+        android:gravity="center_horizontal"
+        android:textSize="60sp"
+        android:layout_centerHorizontal="true"/>
+
+
+    <ImageView
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:id="@+id/imageFromURI"
+        android:layout_below="@id/titulo"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageProgressBar"
+        android:layout_alignTop="@id/imageFromURI"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"/>
+
+
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/imageFromURI"
+        android:layout_marginTop="15dp">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="5dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/representa"
+                    android:textSize="19sp"
+                    android:textColor="#666666"
+                    android:background="#D0E4F2"
+                    android:layout_marginBottom="5dp"
+                    android:padding="3dp"
+                    android:textStyle="italic"
+                    android:text="representa"
+                    android:gravity="center_horizontal"/>
+
+
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:weightSum="100"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:textSize="19sp"
+                        android:textColor="#666"
+                        android:text="Autor: "
+                        android:layout_weight="60"/>
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/autor"
+                        android:textSize="19sp"
+                        android:textColor="#666"
+                        android:text="autor "
+                        android:layout_weight="40"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#EDEDED"
+                    android:weightSum="100"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:textSize="19sp"
+                        android:textColor="#666"
+                        android:text="Creación: "
+                        android:layout_weight="60"/>
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/creacion"
+                        android:textSize="19sp"
+                        android:textColor="#666"
+                        android:text="creación "
+                        android:layout_weight="40"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:weightSum="100"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:textSize="19sp"
+                        android:textColor="#666"
+                        android:text="Ubicación: "
+                        android:layout_weight="60"/>
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/ubicacion"
+                        android:textSize="19sp"
+                        android:textColor="#666"
+                        android:text="ubicación "
+                        android:layout_weight="40"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#EDEDED"
+                    android:weightSum="100"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:textSize="19sp"
+                        android:textColor="#666"
+                        android:layout_marginBottom="5dp"
+                        android:text="Técnica: "
+                        android:layout_weight="60"/>
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/tecnica"
+                        android:textSize="19sp"
+                        android:textColor="#666"
+                        android:layout_marginBottom="5dp"
+                        android:text="técnica "
+                        android:layout_weight="40"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
 
     <RelativeLayout
         android:layout_width="fill_parent"
