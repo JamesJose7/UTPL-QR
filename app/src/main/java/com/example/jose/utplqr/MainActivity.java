@@ -38,6 +38,15 @@ public class MainActivity extends Activity {
             }
         });
 
+        /** Test for emulators (Skip QR Scan) **/
+        /*String test = "Virgen de la Sabiduria#http://icons.iconarchive.com/icons/mazenl77/I-like-buttons-3a/512/Cute-Ball-Go-icon.png#Ruth Simaluisa#2003#Capilla#Pintura#El valor espiritual, tambien denominado como simbolo universitario";
+
+        startNewActivity(test);*/
+
+
+
+
+
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {

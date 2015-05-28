@@ -7,4 +7,5 @@
     <string name="title_activity_second_activity_scanner">Second Activity Scanner</string>
     <string name="start_scan_button"><b>Escanear</b></string>
     <string name="message_search_forqr"><b>Busca un QR!</b></string>
+    <string name="title_activity_display_full_image">DisplayFullImage</string>
 </resources>
