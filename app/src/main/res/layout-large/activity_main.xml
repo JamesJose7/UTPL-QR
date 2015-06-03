@@ -80,7 +80,9 @@
             android:layout_height="fill_parent"
             android:src="@drawable/utpl_cruz"
             android:layout_weight="45"
-            android:layout_marginRight="3dp"/>
+            android:layout_marginRight="3dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"

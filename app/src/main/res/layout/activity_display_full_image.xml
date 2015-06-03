@@ -3,7 +3,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:context="com.example.jose.utplqr.DisplayFullImage"
+                android:id="@+id/displayFullImageLayout"
                 android:background="#000">
+
+
 
     <ImageView
         android:layout_width="fill_parent"
@@ -16,6 +19,12 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:id="@+id/fullScreenImageProgressBar"/>
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/backArrow"
+        android:src="@drawable/ic_arrow_back_white_24dp"/>
 
 
 </RelativeLayout>
