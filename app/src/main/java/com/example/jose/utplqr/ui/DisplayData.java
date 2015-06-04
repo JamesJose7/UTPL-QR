@@ -1,30 +1,28 @@
-package com.example.jose.utplqr;
+package com.example.jose.utplqr.ui;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.jose.utplqr.AlertDialogFragment;
+import com.example.jose.utplqr.R;
+import com.example.jose.utplqr.data.ElementData;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
@@ -32,10 +30,12 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 
 public class DisplayData extends Activity {
@@ -46,7 +46,18 @@ public class DisplayData extends Activity {
     private ProgressBar mProgressBar;
     private String mQRContents;
 
+    private String mClase;
+    private String mElemento;
+
+    private TextView mTituloView;
+    private TextView mAutorView;
+    private TextView mCreacionView;
+    private TextView mUbicacionView;
+    private TextView mTecnicaView;
+    private TextView mRepresentaView;
     private ImageView mImageView;
+
+    private ElementData mElementData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +72,16 @@ public class DisplayData extends Activity {
 
         ImageLoader.getInstance().init(config);
 
+        //Layout elements
+
+        mTituloView = (TextView) findViewById(R.id.titulo);
+        mAutorView = (TextView) findViewById(R.id.autor);
+        mCreacionView = (TextView) findViewById(R.id.creacion);
+        mUbicacionView = (TextView) findViewById(R.id.ubicacion);
+        mTecnicaView = (TextView) findViewById(R.id.tecnica);
+        mRepresentaView = (TextView) findViewById(R.id.representa);
+        mImageView = (ImageView) findViewById(R.id.imageFromURI);
+
 
 
         //Assing progressBar
@@ -74,13 +95,20 @@ public class DisplayData extends Activity {
         final String[] splitString = mQRContents.split("#");
 
 
+        if (splitString.length == 7) {
+            /** Test Data display ***/
+            setCustomData(splitString[0], splitString[1], splitString[2], splitString[3], splitString[4], splitString[5], splitString[6]);
+        } else {
+            mClase = splitString[0];
+            mElemento = splitString[1];
 
-        /** Test Data display ***/
-        setData(splitString[0], splitString[1], splitString[2], splitString[3], splitString[4], splitString[5], splitString[6]);
+            String jsonUrl = "https://api.forecast.io/forecast/161fc4a073257857b499d246069eb4b3/37.8267,-122.423";
+            getContents(jsonUrl);
+        }
 
         //Image View Button
-        mImageView = (ImageView) findViewById(R.id.imageFromURI);
-        mImageView.setOnClickListener(new View.OnClickListener() {
+        ImageView imageView = (ImageView) findViewById(R.id.imageFromURI);
+        imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DisplayData.this, DisplayFullImage.class);
@@ -90,9 +118,7 @@ public class DisplayData extends Activity {
         });
 
 
-        String jsonUrl = "https://api.forecast.io/forecast/161fc4a073257857b499d246069eb4b3/37.8267,-122.423";
 
-        getContents(jsonUrl);
     }
 
     /** Action Bar **/
@@ -122,9 +148,6 @@ public class DisplayData extends Activity {
     /***********************/
 
     public void getContents(String jsonUrl) {
-        String testUrl = "http://es-la.dbpedia.org/sparql?default-graph-uri=&query=SELECT+*%0D%0AWHERE+%7B%0D%0A++%3Fs+a+%3Chttp%3A%2F%2Fdbpedia." +
-                "org%2Fontology%2FPresident%3E+.%0D%0A++%3Fs+%3Chttp%3A%2F%2Fes-la.dbpedia.org%2Fproperty%2Ft%C3%ADtulo%3E+%3Chttp%3A%2F%2Fes-la.dbpedia." +
-                "org%2Fresource%2FPresidente_de_Ecuador%3E+.%0D%0A++%3Fs+%3Fo+%3Fp%0D%0A%7D&format=application%2Fjson&timeout=0&debug=on";
 
 
         if (isNetworkAvailable()) {
@@ -164,11 +187,11 @@ public class DisplayData extends Activity {
                         //Diplay collected data on logcat
                         Log.v(TAG, jsonData);
                         if (response.isSuccessful()) {
-                            //TODO parse json data
+                            mElementData = parseData(jsonData, mClase, mElemento);
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    //TODO Update the display with the collected data
+                                    updateDisplay();
                                 }
                             });
                         } else {
@@ -176,6 +199,9 @@ public class DisplayData extends Activity {
                         }
                     }
                     catch (IOException e) {
+                        Log.e(TAG, "Exception caught: ", e);
+                    }
+                    catch (JSONException e) {
                         Log.e(TAG, "Exception caught: ", e);
                     }
                 }
@@ -211,24 +237,54 @@ public class DisplayData extends Activity {
         dialog.show(getFragmentManager(), "error_dialog");
     }
 
-    public void setData(String titulo, String imagen, String autor, String creacion, String ubicacion, String tecnica, String representa) {
-        TextView tituloView = (TextView) findViewById(R.id.titulo);
-        TextView autorView = (TextView) findViewById(R.id.autor);
-        TextView creacionView = (TextView) findViewById(R.id.creacion);
-        TextView ubicacionView = (TextView) findViewById(R.id.ubicacion);
-        TextView tecnicaView = (TextView) findViewById(R.id.tecnica);
-        TextView representaView = (TextView) findViewById(R.id.representa);
-        ImageView imageView = (ImageView) findViewById(R.id.imageFromURI);
+    public ElementData parseData(String jsonData, String clase, String elemento) throws JSONException{
+        //TODO Change json labels with the real data
+
+        JSONObject jsonObject = new JSONObject(jsonData);
+
+        JSONObject claseObj = jsonObject.getJSONObject(clase);
+        JSONArray elementosArray = claseObj.getJSONArray("data");
+        JSONObject elementoObj = elementosArray.getJSONObject(Integer.parseInt(elemento));
+
+        ElementData elementData = new ElementData();
+
+        elementData.setTitulo(elementoObj.getString("summary"));
+        elementData.setImagenURI(elementoObj.getString("icon"));
+        elementData.setAutor(elementoObj.getString("temperatureMin"));
+        elementData.setCreacion(elementoObj.getString("temperatureMax"));
+        elementData.setUbicacion(elementoObj.getString("humidity"));
+        elementData.setTecnica(elementoObj.getString("pressure"));
+        elementData.setRepresenta(elementoObj.getString("ozone"));
+
+        return elementData;
+    }
+
+    public void updateDisplay() {
+        ElementData elementData = mElementData;
+
+        displayImage(elementData.getImagenURI(), mImageView);
+
+        mTituloView.setText(elementData.getTitulo());
+        mAutorView.setText(elementData.getAutor());
+        mCreacionView.setText(elementData.getCreacion());
+        mUbicacionView.setText(elementData.getUbicacion());
+        mTecnicaView.setText(elementData.getTecnica());
+        mRepresentaView.setText(elementData.getRepresenta());
+
+
+    }
+
+    public void setCustomData(String titulo, String imagen, String autor, String creacion, String ubicacion, String tecnica, String representa) {
 
         //Display image
-        displayImage(imagen, imageView);
+        displayImage(imagen, mImageView);
 
-        tituloView.setText(titulo);
-        autorView.setText(autor);
-        creacionView.setText(creacion);
-        ubicacionView.setText(ubicacion);
-        tecnicaView.setText(tecnica);
-        representaView.setText(representa);
+        mTituloView.setText(titulo);
+        mAutorView.setText(autor);
+        mCreacionView.setText(creacion);
+        mUbicacionView.setText(ubicacion);
+        mTecnicaView.setText(tecnica);
+        mRepresentaView.setText(representa);
     }
 
     public void displayImage(String imageUri, ImageView imageView) {

@@ -1,20 +1,17 @@
-package com.example.jose.utplqr;
+package com.example.jose.utplqr.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.example.jose.utplqr.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
@@ -38,7 +35,7 @@ public class DisplayFullImage extends ActionBarActivity {
         String imageURI = intent.getStringExtra(DisplayData.IMAGE_URI);
 
         //Back to Display Activity arrow
-        ImageView backArrow = (ImageView) findViewById(R.id.backArrow);
+        final Button backArrow = (Button) findViewById(R.id.backArrow);
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
