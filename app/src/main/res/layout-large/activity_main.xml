@@ -60,41 +60,35 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/linear_layout_container"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/buscaQRMessage"
         android:layout_above="@id/cardView"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:weightSum="100"
-        android:background="#aacccccc"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp">
+        android:background="#aacccccc">
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:src="@drawable/utpl_cruz"
-            android:layout_weight="45"
-            android:layout_marginRight="3dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"/>
+            android:layout_weight="45"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:text="Escanea QRs que encuentres en el campus"
             android:textColor="#003F72"
             android:textSize="30sp"
-            android:paddingTop="20dp"
-            android:paddingBottom="10dp"
             android:layout_weight="55"
-            android:gravity="center_vertical|center_horizontal"
-            android:layout_marginLeft="3dp"/>
+            android:gravity="center_vertical|center_horizontal"/>
     </LinearLayout>
 
 </RelativeLayout>
