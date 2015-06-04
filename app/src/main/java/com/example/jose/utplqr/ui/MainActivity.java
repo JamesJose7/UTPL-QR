@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.example.jose.utplqr.R;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -19,17 +20,30 @@ public class MainActivity extends Activity {
 
     public static final String INDIVIDUAL_NUMBER = "INDIVIDUAL_NUMBER";
 
+    private RelativeLayout mLaunchingLayout;
+
+    @Override
+    public void onPause() {
+        super.onPause();  // Always call the superclass method first
+
+        mLaunchingLayout.setVisibility(View.VISIBLE);
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Button buttonStartScan = (Button) findViewById(R.id.buttonStartScan);
-
+        mLaunchingLayout = (RelativeLayout) findViewById(R.id.launchingLayout);
+        mLaunchingLayout.setVisibility(View.INVISIBLE);
 
         buttonStartScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mLaunchingLayout.setVisibility(View.VISIBLE);
+
                 //Custom scan view
                 integrator.setOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                 integrator.setScanningRectangle(500, 500);
@@ -44,10 +58,13 @@ public class MainActivity extends Activity {
 
         startNewActivity(test);*/
 
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();  // Always call the superclass method first
 
-
-
+        mLaunchingLayout.setVisibility(View.INVISIBLE);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
