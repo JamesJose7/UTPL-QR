@@ -1,4 +1,5 @@
-package com.example.jose.utplqr;
+package com.example.jose.utplqr.custom_dialog_fragments;
+
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -7,16 +8,16 @@ import android.content.Context;
 import android.os.Bundle;
 
 /**
- * Created by agua on 08/05/15.
+ * Created by agua on 05/06/15.
  */
-public class AlertDialogFragment extends DialogFragment {
+public class InvalidQRDialogFragment extends DialogFragment {
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(Bundle savedInstancBundle) {
         Context context = getActivity();
         AlertDialog.Builder builder = new AlertDialog.Builder(context)
-                .setTitle("Lo siento!")
-                .setMessage("Hubo un error, por favor intentar de nuevo.")
+                .setTitle("Error!")
+                .setMessage("Código QR inválido.")
                 .setPositiveButton("OK", null);
 
         AlertDialog dialog = builder.create();

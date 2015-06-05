@@ -16,7 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.jose.utplqr.AlertDialogFragment;
+import com.example.jose.utplqr.custom_dialog_fragments.AlertDialogFragment;
 import com.example.jose.utplqr.R;
 import com.example.jose.utplqr.data.ElementData;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -33,7 +33,6 @@ import com.squareup.okhttp.Response;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 
@@ -98,12 +97,14 @@ public class DisplayData extends Activity {
         if (splitString.length == 7) {
             /** Test Data display ***/
             setCustomData(splitString[0], splitString[1], splitString[2], splitString[3], splitString[4], splitString[5], splitString[6]);
-        } else {
+        } else if (splitString.length == 2) {
             mClase = splitString[0];
             mElemento = splitString[1];
 
             String jsonUrl = "https://api.forecast.io/forecast/161fc4a073257857b499d246069eb4b3/37.8267,-122.423";
             getContents(jsonUrl);
+        } else {
+            invalidQRCode();
         }
 
         //Image View Button
@@ -237,7 +238,7 @@ public class DisplayData extends Activity {
         dialog.show(getFragmentManager(), "error_dialog");
     }
 
-    public ElementData parseData(String jsonData, String clase, String elemento) throws JSONException{
+    public ElementData parseData(String jsonData, String clase, String elemento) throws JSONException {
         //TODO Change json labels with the real data
 
         JSONObject jsonObject = new JSONObject(jsonData);
@@ -270,8 +271,6 @@ public class DisplayData extends Activity {
         mUbicacionView.setText(elementData.getUbicacion());
         mTecnicaView.setText(elementData.getTecnica());
         mRepresentaView.setText(elementData.getRepresenta());
-
-
     }
 
     public void setCustomData(String titulo, String imagen, String autor, String creacion, String ubicacion, String tecnica, String representa) {
@@ -285,6 +284,19 @@ public class DisplayData extends Activity {
         mUbicacionView.setText(ubicacion);
         mTecnicaView.setText(tecnica);
         mRepresentaView.setText(representa);
+    }
+
+    public void invalidQRCode() {
+        TextView[] textViews = {mTituloView, mAutorView, mCreacionView, mUbicacionView, mTecnicaView, mRepresentaView};
+
+        for (TextView textView : textViews) {
+            textView.setText("...");
+        }
+
+        displayImage("broken", mImageView);
+        
+        AlertDialogFragment dialog = new AlertDialogFragment();
+        dialog.show(getFragmentManager(), "error_dialog");
     }
 
     public void displayImage(String imageUri, ImageView imageView) {
