@@ -31,10 +31,11 @@ public class DisplayFullImage extends ActionBarActivity {
         ImageView fullScreenImage = (ImageView) findViewById(R.id.imageFullScreen);
         final ProgressBar imageProgressBar = (ProgressBar) findViewById(R.id.fullScreenImageProgressBar);
 
+        //Get image URI from previous activity
         Intent intent = getIntent();
         String imageURI = intent.getStringExtra(DisplayData.IMAGE_URI);
 
-        //Back to Display Activity arrow
+        //Back to DisplayData Activity arrow
         final Button backArrow = (Button) findViewById(R.id.backArrow);
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,11 +44,8 @@ public class DisplayFullImage extends ActionBarActivity {
             }
         });
 
-        //Show exit message
-        Toast.makeText(DisplayFullImage.this, "Deslize hacia abajo para salir", Toast.LENGTH_LONG).show();
-
-
-
+        //Show exit message when activity is launched
+        showToastMessage();
 
         //Universal Image Loader
         ImageLoader imageLoader = ImageLoader.getInstance();
@@ -98,6 +96,10 @@ public class DisplayFullImage extends ActionBarActivity {
                 break;
         }
         return super.onTouchEvent(event);
+    }
+
+    private void showToastMessage() {
+        Toast.makeText(DisplayFullImage.this, "Deslize hacia abajo para salir", Toast.LENGTH_LONG).show();
     }
 
 

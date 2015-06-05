@@ -45,6 +45,7 @@ public class DisplayData extends Activity {
 
     private ProgressBar mProgressBar;
     private String mQRContents;
+    private String mImageURI;
 
     private String mClase;
     private String mElemento;
@@ -59,12 +60,20 @@ public class DisplayData extends Activity {
 
     private ElementData mElementData;
 
+    /*@Override
+    public void onResume() {
+        super.onResume();
+
+        mImageURI = "";
+    }*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_data);
 
         setTitle("UTPL");
+        mImageURI = "";
 
         //Image Loader
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
@@ -73,7 +82,6 @@ public class DisplayData extends Activity {
         ImageLoader.getInstance().init(config);
 
         //Layout elements
-
         mTituloView = (TextView) findViewById(R.id.titulo);
         mAutorView = (TextView) findViewById(R.id.autor);
         mCreacionView = (TextView) findViewById(R.id.creacion);
@@ -98,6 +106,7 @@ public class DisplayData extends Activity {
         if (splitString.length == 7) {
             /** Test Data display ***/
             setCustomData(splitString[0], splitString[1], splitString[2], splitString[3], splitString[4], splitString[5], splitString[6]);
+            mImageURI = splitString[1];
         } else if (splitString.length == 2) {
             mClase = splitString[0];
             mElemento = splitString[1];
@@ -114,7 +123,7 @@ public class DisplayData extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DisplayData.this, DisplayFullImage.class);
-                intent.putExtra(IMAGE_URI, splitString[1]);
+                intent.putExtra(IMAGE_URI, mImageURI);
                 startActivity(intent);
             }
         });
@@ -258,6 +267,7 @@ public class DisplayData extends Activity {
         elementData.setTecnica(elementoObj.getString("pressure"));
         elementData.setRepresenta(elementoObj.getString("ozone"));
 
+
         return elementData;
     }
 
@@ -272,6 +282,9 @@ public class DisplayData extends Activity {
         mUbicacionView.setText(elementData.getUbicacion());
         mTecnicaView.setText(elementData.getTecnica());
         mRepresentaView.setText(elementData.getRepresenta());
+
+        //get imageURI for fullImageView display
+        mImageURI = elementData.getImagenURI();
     }
 
     public void setCustomData(String titulo, String imagen, String autor, String creacion, String ubicacion, String tecnica, String representa) {
