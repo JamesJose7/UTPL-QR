@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.jose.utplqr.custom_dialog_fragments.AlertDialogFragment;
 import com.example.jose.utplqr.R;
+import com.example.jose.utplqr.custom_dialog_fragments.InvalidQRDialogFragment;
 import com.example.jose.utplqr.data.ElementData;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -294,8 +295,8 @@ public class DisplayData extends Activity {
         }
 
         displayImage("broken", mImageView);
-        
-        AlertDialogFragment dialog = new AlertDialogFragment();
+
+        InvalidQRDialogFragment dialog = new InvalidQRDialogFragment();
         dialog.show(getFragmentManager(), "error_dialog");
     }
 
