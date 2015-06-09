@@ -112,14 +112,15 @@ public class DisplayData extends Activity {
             mElemento = splitString[1];
 
             String jsonUrl = "https://api.forecast.io/forecast/161fc4a073257857b499d246069eb4b3/37.8267,-122.423";
-            getContents(jsonUrl);
+            String jsonLocalHost = "http://172.16.88.153:8080/";
+            getContents(jsonLocalHost);
         } else {
+            mImageURI = "";
             invalidQRCode();
         }
 
         //Image View Button
-        ImageView imageView = (ImageView) findViewById(R.id.imageFromURI);
-        imageView.setOnClickListener(new View.OnClickListener() {
+        mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DisplayData.this, DisplayFullImage.class);
@@ -253,19 +254,19 @@ public class DisplayData extends Activity {
 
         JSONObject jsonObject = new JSONObject(jsonData);
 
-        JSONObject claseObj = jsonObject.getJSONObject(clase);
-        JSONArray elementosArray = claseObj.getJSONArray("data");
+        //JSONObject claseObj = jsonObject.getJSONObject(clase);
+        JSONArray elementosArray = jsonObject.getJSONArray(clase);
         JSONObject elementoObj = elementosArray.getJSONObject(Integer.parseInt(elemento));
 
         ElementData elementData = new ElementData();
 
-        elementData.setTitulo(elementoObj.getString("summary"));
-        elementData.setImagenURI(elementoObj.getString("icon"));
-        elementData.setAutor(elementoObj.getString("temperatureMin"));
-        elementData.setCreacion(elementoObj.getString("temperatureMax"));
-        elementData.setUbicacion(elementoObj.getString("humidity"));
-        elementData.setTecnica(elementoObj.getString("pressure"));
-        elementData.setRepresenta(elementoObj.getString("ozone"));
+        elementData.setTitulo(elementoObj.getString("Nombre"));
+        elementData.setImagenURI(elementoObj.getString("Uri"));
+        elementData.setAutor(elementoObj.getString("Autor"));
+        elementData.setCreacion(elementoObj.getString("Creacion"));
+        elementData.setUbicacion(elementoObj.getString("Ubicacion"));
+        elementData.setTecnica(elementoObj.getString("Tecnica"));
+        elementData.setRepresenta(elementoObj.getString("Representa"));
 
 
         return elementData;
