@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +35,7 @@ import com.squareup.okhttp.Response;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 
@@ -57,6 +59,10 @@ public class DisplayData extends Activity {
     private TextView mTecnicaView;
     private TextView mRepresentaView;
     private ImageView mImageView;
+
+    private LinearLayout mOptionalLayout;
+    private TextView mOptionalLabelTextView;
+    private TextView mOptionalTextView;
 
     private ElementData mElementData;
 
@@ -89,7 +95,9 @@ public class DisplayData extends Activity {
         mTecnicaView = (TextView) findViewById(R.id.tecnica);
         mRepresentaView = (TextView) findViewById(R.id.representa);
         mImageView = (ImageView) findViewById(R.id.imageFromURI);
-
+        mOptionalLabelTextView = (TextView) findViewById(R.id.optionalLabelTextView);
+        mOptionalTextView = (TextView) findViewById(R.id.optionalTextView);
+        mOptionalLayout = (LinearLayout) findViewById(R.id.optionalLayout);
 
 
         //Assing progressBar
@@ -210,10 +218,7 @@ public class DisplayData extends Activity {
                             alertUserAboutError();
                         }
                     }
-                    catch (IOException e) {
-                        Log.e(TAG, "Exception caught: ", e);
-                    }
-                    catch (JSONException e) {
+                    catch (IOException | JSONException e) {
                         Log.e(TAG, "Exception caught: ", e);
                     }
                 }
@@ -268,6 +273,13 @@ public class DisplayData extends Activity {
         elementData.setTecnica(elementoObj.getString("Tecnica"));
         elementData.setRepresenta(elementoObj.getString("Representa"));
 
+        if (elementoObj.has("Estilo")) {
+            elementData.setEstilo(elementoObj.getString("Estilo"));
+        }
+
+        if (elementoObj.has("Material")) {
+            elementData.setMateriales(elementoObj.getString("Material"));
+        }
 
         return elementData;
     }
@@ -286,6 +298,18 @@ public class DisplayData extends Activity {
 
         //get imageURI for fullImageView display
         mImageURI = elementData.getImagenURI();
+
+        if (elementData.getEstilo() != null) {
+            mOptionalLayout.setVisibility(View.VISIBLE);
+            mOptionalLabelTextView.setText("Estilo: ");
+            mOptionalTextView.setText(elementData.getEstilo());
+        }
+
+        if (elementData.getMateriales() != null) {
+            mOptionalLayout.setVisibility(View.VISIBLE);
+            mOptionalLabelTextView.setText("Material: ");
+            mOptionalTextView.setText(elementData.getMateriales());
+        }
     }
 
     public void setCustomData(String titulo, String imagen, String autor, String creacion, String ubicacion, String tecnica, String representa) {

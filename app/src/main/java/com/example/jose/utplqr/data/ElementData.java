@@ -12,6 +12,10 @@ public class ElementData {
     private String mTecnica;
     private String mRepresenta;
 
+    //Data not always present
+    private String mEstilo;
+    private String mMateriales;
+
     public void setTitulo(String titulo) {
         mTitulo = titulo;
     }
@@ -66,6 +70,22 @@ public class ElementData {
 
     public String getRepresenta() {
         return mRepresenta;
+    }
+
+    public void setEstilo(String estilo) {
+        mEstilo = estilo;
+    }
+
+    public String getEstilo() {
+        return mEstilo;
+    }
+
+    public void setMateriales(String materiales) {
+        mMateriales = materiales;
+    }
+
+    public String getMateriales() {
+        return mMateriales;
     }
 
 }
